@@ -1,0 +1,30 @@
+(ROOT (S (NP (Det a) (N caviar)) (VP (V is) (Adj delicious))) .)
+23.849524454882566
+(ROOT (S (NP (Det the) (N caviar)) (VP (V is) (Adj delicious))) .)
+22.26571564877778
+(ROOT (S (NP (Det some) (N caviar)) (VP (V is) (Adj delicious))) .)
+22.26571564877778
+(ROOT (S (NP (Det all) (N caviar)) (VP (V is) (Adj delicious))) .)
+22.851255342961682
+(ROOT (S (NP (Det two) (N caviar)) (VP (V is) (Adj delicious))) .)
+23.849524454882566
+(ROOT (S (NP (Det his) (N caviar)) (VP (V is) (Adj delicious))) .)
+22.26571564877778
+(ROOT (S (NP (Det her) (N caviar)) (VP (V is) (Adj delicious))) .)
+22.26571564877778
+(ROOT (S (NP (Det its) (N caviar)) (VP (V is) (Adj delicious))) .)
+22.26571564877778
+(ROOT (S (NP (Det their) (N caviar)) (VP (V is) (Adj delicious))) .)
+22.26571564877778
+(ROOT (S (NP (Det the) (N caviar)) (VP (V was) (Adj delicious))) .)
+22.26571564877778
+(ROOT (S (NP (Det all) (N caviar)) (VP (V are) (Adj delicious))) .)
+23.851255342961682
+(ROOT (S (NP (Det the) (N caviar)) (VP (V entice))) .)
+19.45980270089408
+(ROOT (S (NP (Det the) (N caviar)) (VP (V (V entice) -s))) .)
+23.70859609115123
+(ROOT (S (NP she) (VP (V (V eat) -ed) (NP (Det the) (N caviar)))) .)
+27.614765519516094
+(ROOT (S (NP she) (VP (V (V eat) -ed) (N caviar))) .)
+21.704263670355196

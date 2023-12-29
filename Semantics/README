@@ -1,0 +1,187 @@
+3.
+    a.
+        i.  f = %x loves(Mary, x)
+        ii. f(x) = loves(Mary, x)
+
+    b.  %subj loves(Jill,subj)
+         NP    (V    NP)
+                  VP
+
+    c.
+        i.  f = %y A%x woman(x) => loves(x, y)
+        ii. f represents: loves all women
+            f(John) represents: John loves all women.
+
+    d.  f(%x loves(Mary, x)) = (%x Obviously(loves(Mary, x)))
+        f(%x loves(Mary, x)) = (%g %x Obviously(g(x)))(%x loves(Mary, x))
+        f = %g %x Obviously(g(x))
+
+        "Sue obviously loves Mary": (%g %x Obviously(g(x)))(%x loves(Mary, x))(Sue)
+
+    e.  f = %x %y (%e act(e, loving), lovee(e, x), lover(e, y))
+
+    f.  f(Mary) = (%x %y (%e act(e, loving), lovee(e, x), lover(e, y)))(Mary)
+        g(f(Mary)) = (%f %y (f(y), manner(e, passionate)))((%x %y (%e act(e, loving), lovee(e, x), lover(e, y)))(Mary))
+        g = %f %y (f(y), manner(e, passionate))
+
+    g.
+        i.  f(%x loves(Mary, x)) = (A%y woman(y) => loves(Mary, y))
+            f(%x loves(Mary, x)) = (%g (A%y woman(y) => g(y)))(%x loves(Mary, x))
+            f = %g (A%y woman(y) => g(y))
+        ii. f(%x loves(Mary, x)): Every woman loves Mary.
+            (%x loves(Mary, x)): loves Mary
+            f: every woman
+
+    h.
+        i.  g(woman) = f
+            g(woman) = %g (A%y woman(y) => g(y))
+            g(woman) = %f (A%y woman(y) => f(y))
+            g(woman) = (%w %f (A%y w(y) => f(y)))(woman)
+            g = %w %f (A%y w(y) => f(y))
+        ii. g represents 'every'
+
+    i.
+        i.  f(%x loves(Mary, x)) = loves(Mary, Papa)
+            f(%x loves(Mary, x)) = (%g g(Papa))(%x loves(Mary, x))
+            f = %g g(Papa)
+        ii. We want to give Papa these funny semantics because we want to ensure consistency with the semantics of other words. The two expressions we are comparing are (A%y woman(y) => loves(Mary, y)) from 3g and loves(Mary, Papa) from 3i. As you can see, the behavior of Papa in Papa loves Mary is similar to that of y where woman(y) and thus y loves Mary.
+
+4.
+    1. Joe love -s Jill .
+
+        Grammatical sentence, found most plausible semantics.
+
+    2. he love -s her .
+
+        Grammatical sentence, found most plausible semantics.
+
+    3. him love -s she .
+
+        Ungrammatical sentence, but the system did not print a message and tried to interpret the sentence how it was intended. Although, the semantics seem appropriate for the case that 'him' is replaced with its subject version and 'she' is replaced with its object version.
+
+    4. Papa sleep -s with a spoon .
+
+        Grammatical sentence, found most plausible semantics.
+
+    5. Papa eat -ed with a spoon .
+
+        Grammatical sentence, found most plausible semantics.
+
+    6. Papa sleep -s every bonbon with a spoon .
+
+        Grammatical sentence, the system did not find the most plausible semantics and printed the message: 'No consistent way to assign attributes!  (Maybe another parse?)'.
+        The part where this occurs is at:
+            VP: sleep -s every bonbon with a spoon
+        The reason for this is that english.gra only interprets 'sleep' as an intransitive verb whereas english.gr interprets 'sleep' as a verb generally. Thus, after identifying the noun phrase 'every bonbon with a spoon', the semantics for 'sleep -s every bonbon with a spoon' is inconsistent with the parse given.
+
+        This sentence produced a parse from the given grammar and is technically grammatical, but I would personally argue that it is ungrammatical since it doesn't make sense to use 'sleep' as a transitive verb here. The sentence is technically grammatical as 'sleep' can be a transitive verb, for example, 'The AirBnB sleeps five people'.
+
+    7. Papa eat -ed every bonbon with a spoon .
+
+        Grammatical sentence, did not find most plausible semantics.
+        Output:
+            Attributes: head=eat sem=Assert(Speaker, Past(eat(all(%x bonbon(x) ^ with(some(spoon),x)),Papa)))
+        This is saying that every bonbon with a spoon is eaten by Papa. the more plausible semantics would be that Papa ate with a spoon and ate every bonbon. It would have helped if the parser had chosen a different valid parse, where 'bonbon with a spoon' is not grouped as a noun phrase and 'eat -ed every bonbon' is grouped as the sub verb phrase.
+
+    8. have a bonbon !
+
+        Grammatical sentence, found most plausible semantics.
+
+    9. a bonbon on the spoon entice -s .
+
+        Grammatical sentence, found most plausible semantics.
+
+    10. a bonbon on the spoon entice -0 .
+
+        Ungrammatical sentence, the system did not find the most plausible semantics and printed the message: 'No consistent way to assign attributes!  (Maybe another parse?)'. The reason for this is that the plurality did not match up. The intransitive verb 'entice' should be 'entices' in order to match up with the singular 'bonbon'. Alternatively, 'bonbon' could be plural.
+
+    11. the bonbon -s on the spoon entice -0 .
+
+        Grammatical sentence, found most plausible semantics.
+        The most plausible semantics were found this time due to the plurality of 'bonbons on the spoon'.
+
+    12. Joe kiss -ed every chief of staff .
+
+        Grammatical sentence, found most plausible semantics.
+
+    13. Jill say -s that Joe might sleep on the floor !
+
+        Grammatical sentence, did not find most plausible semantics.
+        Output:
+            Attributes: head=say sem=Exclaim(Speaker, Pres(on(the(floor),say(might(sleep(Joe)), Jill))))
+        This is saying that Jill is on the floor when she says that Joe might sleep. The intended semantics would be that Jill is saying that 'Joe might sleep on the floor'. It would have helped if the parser had chosen a different valid parse, namely a parse that groups 'sleep on the floor' as a verb phrase ('sleep' is an intransitive).
+
+    14. the perplexed president eat -ed a pickle .
+
+        Grammatical sentence, found most plausible semantics.
+
+    15. Papa is perplexed .
+
+        Grammatical sentence, found most plausible semantics.
+
+    16. Papa is chief of staff .
+
+        Grammatical sentence, found most plausible semantics.
+
+    17. Papa want -ed a sandwich .
+
+        Grammatical sentence, found most plausible semantics.
+
+    18. Papa want -ed to eat a sandwich .
+
+        Grammatical sentence, found most plausible semantics.
+        The sentence is interpretted as Papa wanted Papa to eat a sandwich. Which semantically makes sense and matches the most plausible semantics.
+
+    19. Papa want -ed Joe to eat a pickle .
+
+        Grammatical sentence, found most plausible semantics. This is essentially the same as the above sentence except that instead of implying that Papa wanted himself to eat a sandwich, the intended subject is given as 'Joe'.
+
+    20. Papa would have eat -ed his sandwich -s .
+
+        Grammatical sentence, found most plausible semantics.
+
+    21. every sandwich was go -ing to have been delicious .
+
+        Grammatical sentence, found most plausible semantics.
+
+    22. the fine and blue woman and every man must have eat -ed two sandwich -s and sleep -ed on the floor .
+
+        Grammatical sentence, did not find most plausible semantics.
+        Output:
+            Attributes: head=and sem=Assert(Speaker, must(on(the(floor),Perf(eat(two(sandwich),and(the(%x woman(x) ^ (fine(x)^blue(x))),all(man))) ^ sleep(and(the(%x woman(x) ^ (fine(x)^blue(x))),all(man)))))))
+        Although the semantics for this giant attributes output are mostly correct, there is one key inaccuracy that makes it not the most plausible semantics. The most plausible semantics would be that 'the fine and blue woman and every man' is the subject noun phrase, and the two verb phrases are 'eat -ed two sandwich -s' and 'sleep -ed on the floor'. However, the parsed semantics say that both actions of eating the sandwiches and sleeping were both performed on the floor. It would have helped if the parser had chosen a differen valid parse of the same sentence where 'sleep -ed on the floor' was grouped as a verb phrase. Thus, a different parse would have gotten the correct semantics.
+
+5.
+    To handle the inelegant facts elegantly, I looked at rules that contained verbs dealing with singular cases and determiners dealing with plural cases. Basically, I added semantic rules where num=mass for all verb rules that had num=sing and all determiner rules that had num=pl. Additionally, I made some modifications such as not allowing 'two caviar' since mass nouns do not always behave like plural nouns with plural determiners. Also, after adding caviar as a mass noun, I added rules so that mass noun phrases are a combination of plural determiners and mass nouns. I also added the rules that sentences are a combination of mass noun phrases and singular verb phrases since verbs treat mass nouns as singular. I then realized that the rules for mass verbs were irrelevant since we would just be using singular verbs/verb phrases anyways.
+
+    I then ran it on a few sentences about caviar in the caviar.sen file which contains both grammatical and ungrammatical sentences containing 'caviar'. The semantics were able to identify the best parse for sentences that were grammatical and did not provide semantics for sentences that were ungrammatical (the semantics were the most plausible semantics, but the sentences were quite simple, I really just wanted to test if it was using correct plurality for determiners and verbs). It was able to identify that only plural determiners (aside from 'two') were allowed to be used with the mass noun 'caviar' and that verbs should treat mass nouns as singular ('all caviar is' is allowed and 'all caviar are' is not allowed, likewise 'all caviar entice -s' is allowed and 'all caviar entice' is not allowed).
+    Although the most plausible semantics were found, the output did occasionally list an Or: case for the attributes where it would place 'head=' either at the start or end of the attributes. Lastly, although it correctly identified grammatical sentences based on plurality with determiners and verbs, there was one case that it couldn't handle. I noticed that mass nouns can behave as objects as well as standalone object noun phrases (since they have similar behavior to plural nouns) which would make the sentence 'she eat -ed caviar' grammatical. However, the program was unable to identify this as I would have to add a rule that allows mass nouns to be noun phrases. The program was able to identify that 'she eat -ed the caviar' was grammatical as mass nouns can be objects.
+
+6.
+    a.  
+        two:
+        1 Det[=1 num=pl   sem="%dom %pred E%first E%second [first!=second ^ dom(first)^dom(second)] ^ pred(first) ^ pred(second)"] two
+
+        The lambda term is confirming that the determiner 'two' is in fact referring to two things that are not the same thing. The lambda-terms identify that there exists the two things as first and second. It then checks that first and second are not equal otherwise the determiner 'two' wouldn't make sense. It then confirms that both first and second follow the given domain restriction separately. Lastly, it confirms that the given predicate separately applies to both first and second.
+
+        singular the:
+        1 Det[=1 num=sing sem="%dom %pred E%t [dom(t) ^ A%u [dom(u) ^ u!=t ==> salience(u) < salience(t)] ] ^ pred(t)"] the
+
+        This complicated attribute is essentially just saying that the determiner 'the' is referring to the intended thing and not any other existing thing. The lambda-terms are saying that there exists a 't' such that it is in the given domain 'dom' and for all other 'u' that are also in the given domain 'dom', salience(u) < salience(t) implying that 't' is what 'the' is referring to. Lastly, it confirms that the predicate 'pred' applies to 't'.
+
+        plural the:
+        1 Det[=1 num=pl   sem="%dom %pred E%T [subset(T,dom) ^ |T|>one ^ A%U [subset(U,dom) ^ |U|>one ^ U!=T ==> salience(U) < salience(T)] ] ^ pred(T)"] the
+
+        The attribute for plural the is similar to that of singular the. The different is that 't' and 'u' are now represented as sets 'T' and 'U'. The lambda-terms confirm that there exists 'T' that is a subset of the given domain 'dom' and that all other 'U' are also subsets of the given domain 'dom'. It also confirms that the subset 'T' and 'U' are not each just one thing, confirming that 'the' is plural. The rest of the lambda rules are functionally similar to singular the.
+
+    b.  
+        ??? should be replaced by 2(1,3), I think. I could not wrap my brain around and had to use trial and error.
+
+
+
+        1 and 2 got flipped from english.gra. From the comments:
+
+        # from 1(2) -- or equivalently %subj 1(2,subj) --
+        # to %subj 2(%obj 1(obj,subj)).
+
+        I would guess this is because of the change in order of obj and subj in the sentence.
