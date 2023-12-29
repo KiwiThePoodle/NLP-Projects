@@ -1,0 +1,7 @@
+1	ROOT	A
+0.1	A	a
+0.1	B	A B
+0.2	A	A B
+0.3	B	B A
+0.6	B	a
+0.7	A	B A
